@@ -26,6 +26,7 @@ open class CollectionViewController: ViewController {
 
 	open var clearsSelectionOnViewWillAppear = true
 
+    open var additionalContentViewInsetTop = 0
 
 	open fileprivate(set) lazy var collectionView: CollectionView = self.createCollectionView()
 
@@ -45,8 +46,11 @@ open class CollectionViewController: ViewController {
 		let bounds = view.bounds
 
 		animation.runAlways {
+            var contentInsets = self.innerDecorationInsets
+            contentInsets.top += CGFloat(self.additionalContentViewInsetTop) // FIXME: padding to solve cut of section headers
+            
 			if automaticallyAdjustsCollectionViewInsets {
-				collectionView.setContentInset(innerDecorationInsets, maintainingVisualContentOffset: true)
+				collectionView.setContentInset(contentInsets, maintainingVisualContentOffset: true)
 				collectionView.scrollIndicatorInsets = outerDecorationInsets
 			}
 

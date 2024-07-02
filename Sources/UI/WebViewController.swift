@@ -48,6 +48,8 @@ open class WebViewController: ViewController, KeyValueObserver, WKNavigationDele
 			}
 		}
 	}
+    
+    open var additionalContentViewInsetTop = 0
 
 
 	fileprivate func createWebView() -> WKWebView {
@@ -189,6 +191,8 @@ open class WebViewController: ViewController, KeyValueObserver, WKNavigationDele
 				innerDecorationInsets.bottom = 0
 			}
 
+            innerDecorationInsets.top += CGFloat(self.additionalContentViewInsetTop) // FIXME: padding to solve cut of section headers
+            
 			// WKWebView doesn't properly support non-zero scrollView.contentInset at the moment causing .contentSize to be too large.
 			var webViewFrame = bounds.inset(by: innerDecorationInsets)
 

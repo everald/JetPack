@@ -23,6 +23,9 @@ open class TableViewController: ViewController {
 
 
 	open var clearsSelectionOnViewWillAppear = true
+    
+    
+    open var additionalContentViewInsetTop = 0
 
 
 	fileprivate func createTableView() -> TableView {
@@ -62,6 +65,7 @@ open class TableViewController: ViewController {
 
 				contentInsets.left = 0
 				contentInsets.right = 0
+                contentInsets.top += CGFloat(self.additionalContentViewInsetTop) // FIXME: padding to solve cut of section headers
 				scrollIndicatorInsets.left = 0
 				scrollIndicatorInsets.right = 0
 
